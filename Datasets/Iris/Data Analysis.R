@@ -6,6 +6,7 @@ colnames(iris)
 
 summary(iris)
 
+install.packages('ggplot2')
 library(ggplot2)
 
 # Distribution of the sepal and petals lenght and width

@@ -1,6 +1,8 @@
 # Petal width and length are highly correlated
 # Let's run linear regression for them
 
+library(ggplot2)
+
 lsmodel <- lsfit(iris$Petal.Length, iris$Petal.Width)
 summary(lsmodel)
 lsmodel$coefficients
