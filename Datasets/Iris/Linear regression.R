@@ -45,3 +45,29 @@ sepal.lm.total$coefficients
 
 # Using step
 summary(step(lm(Sepal.Length ~ Sepal.Width * Species, data=iris)))
+
+area.lm <- lm(Petal ~ Sepal, data=iris.areas)
+
+ggplot(iris.areas, aes(x=Sepal, y=Petal)) +
+  geom_point(aes(col=Species)) +
+  ggtitle("Petal by Sepal") +
+  geom_abline(slope=area.lm$coefficients[2], intercept = area.lm$coefficients[1])
+
+area.lm.set <- lm(Petal ~ Sepal, data=iris.areas[iris.areas$Species == "setosa",])
+area.lm.ver <- lm(Petal ~ Sepal, data=iris.areas[iris.areas$Species == "versicolor",])
+area.lm.vir <- lm(Petal ~ Sepal, data=iris.areas[iris.areas$Species == "virginica",])
+area.lm.set$coefficients
+area.lm.ver$coefficients
+area.lm.vir$coefficients
+
+ggplot(iris.areas, aes(x=Sepal, y=Petal)) +
+  geom_point(aes(col=Species)) +
+  ggtitle("Petal by Sepal") +
+  geom_abline(slope=area.lm$coefficients[2], intercept = area.lm$coefficients[1]) +
+  geom_abline(color="red", slope=area.lm.set$coefficients[2], intercept = area.lm.set$coefficients[1]) +
+  geom_abline(color="green", slope=area.lm.ver$coefficients[2], intercept = area.lm.ver$coefficients[1]) +
+  geom_abline(color="blue", slope=area.lm.vir$coefficients[2], intercept = area.lm.vir$coefficients[1])
+
+area.lm.total <- lm(Petal ~ Sepal:Species + Species - 1, data=iris.areas)
+summary(area.lm.total)
+area.lm.total$coefficients
