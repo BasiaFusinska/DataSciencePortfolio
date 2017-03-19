@@ -34,3 +34,13 @@ draw.hist <- function(data, aes, xlabel, bins=20) {
     theme(legend.position="none")
 }
 
+split.dataset <- function(data, split.ratio, seed=123){
+  smp_size <- floor(split.ratio * nrow(data))
+  
+  ## set the seed to make your partition reproductible
+  set.seed(seed)
+  train_ind <- sample(seq_len(nrow(data)), size = smp_size)
+  
+  return(list(train = data[train_ind, ], test = data[-train_ind, ]))
+}
+
