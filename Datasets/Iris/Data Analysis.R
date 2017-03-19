@@ -50,3 +50,17 @@ cor(iris$Petal.Length, iris$Petal.Width)
 install.packages("GGally")
 library(GGally)
 ggpairs(iris, aes(colour = Species, alpha=0.4))
+
+# Statistics for the area
+iris.areas <- data.frame(Species = iris$Species)
+iris.areas$Sepal <- iris$Sepal.Length * iris$Sepal.Width
+iris.areas$Petal <- iris$Petal.Length * iris$Petal.Width
+
+head(iris.areas)
+summary(iris.areas)
+
+ggplot(iris.areas, aes(x=Sepal, y=Petal)) +
+  geom_point(aes(col=Species)) +
+  ggtitle("Petal by Sepal")
+
+ggpairs(iris.areas, aes(colour = Species, alpha=0.4))
